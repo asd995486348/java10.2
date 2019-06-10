@@ -125,4 +125,13 @@
       update_admin = #{updateAdmin,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getAll" resultType="Brand" parameterType="Brand">
+    select * from brand
+    <where>
+      <if test="pid!=null">
+        and pid=#{pid}
+      </if>
+    </where>
+  </select>
 </mapper>

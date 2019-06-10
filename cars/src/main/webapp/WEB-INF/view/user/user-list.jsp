@@ -12,7 +12,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <link rel="stylesheet" href="static/css/font.css">
         <link rel="stylesheet" href="static/css/xadmin.css">
-        <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
         <script src="static/lib/layui/layui.js" charset="utf-8"></script>
         <script type="text/javascript" src="static/js/xadmin.js"></script>
         <script src="static/js/jquery.min.js"></script>
