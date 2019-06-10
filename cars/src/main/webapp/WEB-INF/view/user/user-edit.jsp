@@ -62,16 +62,20 @@
                           autocomplete="off" class="layui-input">
                       </div>
                   </div>
-                  <div class="layui-form-item">
-                      <label class="layui-form-label"><span class="x-red">*</span>权限</label>
-                      <div class="layui-input-inline">
-                        <select name="powerid" id="powerid">
-                            <c:forEach items="${pl}" var="p">
-                                <option <c:if test="${p.id==user.powerid}">selected</c:if> value="${p.id}">${p.power}</option>
-                            </c:forEach>
-                        </select>
+
+                  <c:if test="${user.powerid!=1}">
+                      <div class="layui-form-item">
+                          <label class="layui-form-label"><span class="x-red">*</span>权限</label>
+                          <div class="layui-input-inline">
+                              <select name="powerid" id="powerid">
+                                  <c:forEach items="${pl}" var="p">
+                                      <option <c:if test="${p.id==user.powerid}">selected</c:if> value="${p.id}">${p.power}</option>
+                                  </c:forEach>
+                              </select>
+                          </div>
                       </div>
-                  </div>
+                  </c:if>
+
                   <c:if test="${empty user}">
                       <div class="layui-form-item">
                           <label for="password" class="layui-form-label">
