@@ -190,4 +190,10 @@
     <include refid="Base_Column_List" />
     from user where username=#{username}
   </select>
+
+  <select id="checkPwd" resultType="User" parameterType="User">
+    select
+    <include refid="Base_Column_List" />
+    from user where id=#{id} and password=#{password}
+  </select>
 </mapper>

@@ -61,4 +61,13 @@ public class UserController {
     public ResBean delete(Integer id){
         return userService.delete(id);
     }
+    @RequestMapping("/toPwd")
+    public String toPwd(){
+        return "user/user-pwd";
+    }
+    @RequestMapping("/checkPwd")
+    @ResponseBody
+    public ResBean checkPwd(User user){
+        return userService.checkPwd(user);
+    }
 }

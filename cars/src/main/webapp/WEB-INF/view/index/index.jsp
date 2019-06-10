@@ -40,7 +40,7 @@
                         <dd>
                             <a onclick="xadmin.open('个人信息','user/toEdit.do?id=${loginUser.id}',600,400)">个人信息</a></dd>
                         <dd>
-                            <a onclick="xadmin.open('修改密码','http://www.baidu.com')">修改密码</a></dd>
+                            <a onclick="xadmin.open('修改密码','user/toPwd.do',600,400)">修改密码</a></dd>
                         <dd>
                             <a href="exit.do">退出</a></dd>
                     </dl>

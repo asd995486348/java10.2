@@ -19,4 +19,6 @@ public interface UserService {
     ResBean delete(Integer id);
 
     User getById(Integer id);
+
+    ResBean checkPwd(User user);
 }

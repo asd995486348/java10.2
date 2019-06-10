@@ -26,4 +26,6 @@ public interface UserMapper {
     List<User> getPage(User user);
 
     User checkUname(String usernmae);
+
+    User checkPwd(User user);
 }
