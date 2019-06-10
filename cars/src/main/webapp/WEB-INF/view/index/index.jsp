@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <!doctype html>
 <html class="x-admin-sm">
     <head>
+        <base href="${basePath}">
         <meta charset="UTF-8">
         <title>逆时光网咖欢迎您</title>
         <meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -32,15 +34,15 @@
             </div>
             <ul class="layui-nav right" lay-filter="">
                 <li class="layui-nav-item">
-                    <a href="javascript:;">admin</a>
+                    <a href="javascript:;">${loginUser.realname}</a>
                     <dl class="layui-nav-child">
                         <!-- 二级菜单 -->
                         <dd>
-                            <a onclick="xadmin.open('个人信息','http://www.baidu.com')">个人信息</a></dd>
+                            <a onclick="xadmin.open('个人信息','user/toEdit.do?id=${loginUser.id}',600,400)">个人信息</a></dd>
                         <dd>
                             <a onclick="xadmin.open('修改密码','http://www.baidu.com')">修改密码</a></dd>
                         <dd>
-                            <a href="/cars">退出</a></dd>
+                            <a href="exit.do">退出</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item to-index">
