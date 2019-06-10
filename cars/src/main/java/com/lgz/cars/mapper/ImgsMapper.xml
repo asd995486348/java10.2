@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lgz.cars.mapper.ImgsMapper" >
+  <resultMap id="BaseResultMap" type="com.lgz.cars.pojo.Imgs" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="carid" property="carid" jdbcType="INTEGER" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="VARCHAR" />
+    <result column="create_admin" property="createAdmin" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
+    <result column="update_admin" property="updateAdmin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, carid, img, status, create_date, create_admin, update_date, update_admin
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from imgs
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from imgs
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lgz.cars.pojo.Imgs" >
+    insert into imgs (id, carid, img, 
+      status, create_date, create_admin, 
+      update_date, update_admin)
+    values (#{id,jdbcType=INTEGER}, #{carid,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{createDate,jdbcType=VARCHAR}, #{createAdmin,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=VARCHAR}, #{updateAdmin,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lgz.cars.pojo.Imgs" >
+    insert into imgs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="carid != null" >
+        carid,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createAdmin != null" >
+        create_admin,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateAdmin != null" >
+        update_admin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="carid != null" >
+        #{carid,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createAdmin != null" >
+        #{createAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateAdmin != null" >
+        #{updateAdmin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lgz.cars.pojo.Imgs" >
+    update imgs
+    <set >
+      <if test="carid != null" >
+        carid = #{carid,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createAdmin != null" >
+        create_admin = #{createAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateAdmin != null" >
+        update_admin = #{updateAdmin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lgz.cars.pojo.Imgs" >
+    update imgs
+    set carid = #{carid,jdbcType=INTEGER},
+      img = #{img,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      create_admin = #{createAdmin,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR},
+      update_admin = #{updateAdmin,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

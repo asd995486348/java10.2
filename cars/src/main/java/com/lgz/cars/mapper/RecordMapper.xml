@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lgz.cars.mapper.RecordMapper" >
+  <resultMap id="BaseResultMap" type="com.lgz.cars.pojo.Record" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="carid" property="carid" jdbcType="INTEGER" />
+    <result column="btime" property="btime" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="bmsg" property="bmsg" jdbcType="VARCHAR" />
+    <result column="apply" property="apply" jdbcType="INTEGER" />
+    <result column="bmileage" property="bmileage" jdbcType="DOUBLE" />
+    <result column="rtime" property="rtime" jdbcType="VARCHAR" />
+    <result column="rmileage" property="rmileage" jdbcType="DOUBLE" />
+    <result column="rmsg" property="rmsg" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="VARCHAR" />
+    <result column="create_admin" property="createAdmin" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
+    <result column="update_admin" property="updateAdmin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uid, carid, btime, address, bmsg, apply, bmileage, rtime, rmileage, rmsg, status, 
+    create_date, create_admin, update_date, update_admin
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lgz.cars.pojo.Record" >
+    insert into record (id, uid, carid, 
+      btime, address, bmsg, 
+      apply, bmileage, rtime, 
+      rmileage, rmsg, status, 
+      create_date, create_admin, update_date, 
+      update_admin)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{carid,jdbcType=INTEGER}, 
+      #{btime,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{bmsg,jdbcType=VARCHAR}, 
+      #{apply,jdbcType=INTEGER}, #{bmileage,jdbcType=DOUBLE}, #{rtime,jdbcType=VARCHAR}, 
+      #{rmileage,jdbcType=DOUBLE}, #{rmsg,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=VARCHAR}, #{createAdmin,jdbcType=VARCHAR}, #{updateDate,jdbcType=VARCHAR}, 
+      #{updateAdmin,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lgz.cars.pojo.Record" >
+    insert into record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="carid != null" >
+        carid,
+      </if>
+      <if test="btime != null" >
+        btime,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="bmsg != null" >
+        bmsg,
+      </if>
+      <if test="apply != null" >
+        apply,
+      </if>
+      <if test="bmileage != null" >
+        bmileage,
+      </if>
+      <if test="rtime != null" >
+        rtime,
+      </if>
+      <if test="rmileage != null" >
+        rmileage,
+      </if>
+      <if test="rmsg != null" >
+        rmsg,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createAdmin != null" >
+        create_admin,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateAdmin != null" >
+        update_admin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="carid != null" >
+        #{carid,jdbcType=INTEGER},
+      </if>
+      <if test="btime != null" >
+        #{btime,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="bmsg != null" >
+        #{bmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="apply != null" >
+        #{apply,jdbcType=INTEGER},
+      </if>
+      <if test="bmileage != null" >
+        #{bmileage,jdbcType=DOUBLE},
+      </if>
+      <if test="rtime != null" >
+        #{rtime,jdbcType=VARCHAR},
+      </if>
+      <if test="rmileage != null" >
+        #{rmileage,jdbcType=DOUBLE},
+      </if>
+      <if test="rmsg != null" >
+        #{rmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createAdmin != null" >
+        #{createAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateAdmin != null" >
+        #{updateAdmin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lgz.cars.pojo.Record" >
+    update record
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="carid != null" >
+        carid = #{carid,jdbcType=INTEGER},
+      </if>
+      <if test="btime != null" >
+        btime = #{btime,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="bmsg != null" >
+        bmsg = #{bmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="apply != null" >
+        apply = #{apply,jdbcType=INTEGER},
+      </if>
+      <if test="bmileage != null" >
+        bmileage = #{bmileage,jdbcType=DOUBLE},
+      </if>
+      <if test="rtime != null" >
+        rtime = #{rtime,jdbcType=VARCHAR},
+      </if>
+      <if test="rmileage != null" >
+        rmileage = #{rmileage,jdbcType=DOUBLE},
+      </if>
+      <if test="rmsg != null" >
+        rmsg = #{rmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createAdmin != null" >
+        create_admin = #{createAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateAdmin != null" >
+        update_admin = #{updateAdmin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lgz.cars.pojo.Record" >
+    update record
+    set uid = #{uid,jdbcType=INTEGER},
+      carid = #{carid,jdbcType=INTEGER},
+      btime = #{btime,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      bmsg = #{bmsg,jdbcType=VARCHAR},
+      apply = #{apply,jdbcType=INTEGER},
+      bmileage = #{bmileage,jdbcType=DOUBLE},
+      rtime = #{rtime,jdbcType=VARCHAR},
+      rmileage = #{rmileage,jdbcType=DOUBLE},
+      rmsg = #{rmsg,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      create_admin = #{createAdmin,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR},
+      update_admin = #{updateAdmin,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lgz.cars.mapper.CarMapper" >
+  <resultMap id="BaseResultMap" type="com.lgz.cars.pojo.Car" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="brandid" property="brandid" jdbcType="INTEGER" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="carno" property="carno" jdbcType="VARCHAR" />
+    <result column="carage" property="carage" jdbcType="INTEGER" />
+    <result column="bcount" property="bcount" jdbcType="INTEGER" />
+    <result column="isborrow" property="isborrow" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="VARCHAR" />
+    <result column="create_admin" property="createAdmin" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
+    <result column="update_admin" property="updateAdmin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, brandid, color, carno, carage, bcount, isborrow, status, create_date, create_admin, 
+    update_date, update_admin
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from car
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from car
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lgz.cars.pojo.Car" >
+    insert into car (id, brandid, color, 
+      carno, carage, bcount, 
+      isborrow, status, create_date, 
+      create_admin, update_date, update_admin
+      )
+    values (#{id,jdbcType=INTEGER}, #{brandid,jdbcType=INTEGER}, #{color,jdbcType=VARCHAR}, 
+      #{carno,jdbcType=VARCHAR}, #{carage,jdbcType=INTEGER}, #{bcount,jdbcType=INTEGER}, 
+      #{isborrow,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createDate,jdbcType=VARCHAR}, 
+      #{createAdmin,jdbcType=VARCHAR}, #{updateDate,jdbcType=VARCHAR}, #{updateAdmin,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lgz.cars.pojo.Car" >
+    insert into car
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="brandid != null" >
+        brandid,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="carno != null" >
+        carno,
+      </if>
+      <if test="carage != null" >
+        carage,
+      </if>
+      <if test="bcount != null" >
+        bcount,
+      </if>
+      <if test="isborrow != null" >
+        isborrow,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createAdmin != null" >
+        create_admin,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateAdmin != null" >
+        update_admin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="brandid != null" >
+        #{brandid,jdbcType=INTEGER},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="carno != null" >
+        #{carno,jdbcType=VARCHAR},
+      </if>
+      <if test="carage != null" >
+        #{carage,jdbcType=INTEGER},
+      </if>
+      <if test="bcount != null" >
+        #{bcount,jdbcType=INTEGER},
+      </if>
+      <if test="isborrow != null" >
+        #{isborrow,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createAdmin != null" >
+        #{createAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateAdmin != null" >
+        #{updateAdmin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lgz.cars.pojo.Car" >
+    update car
+    <set >
+      <if test="brandid != null" >
+        brandid = #{brandid,jdbcType=INTEGER},
+      </if>
+      <if test="color != null" >
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="carno != null" >
+        carno = #{carno,jdbcType=VARCHAR},
+      </if>
+      <if test="carage != null" >
+        carage = #{carage,jdbcType=INTEGER},
+      </if>
+      <if test="bcount != null" >
+        bcount = #{bcount,jdbcType=INTEGER},
+      </if>
+      <if test="isborrow != null" >
+        isborrow = #{isborrow,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createAdmin != null" >
+        create_admin = #{createAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateAdmin != null" >
+        update_admin = #{updateAdmin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lgz.cars.pojo.Car" >
+    update car
+    set brandid = #{brandid,jdbcType=INTEGER},
+      color = #{color,jdbcType=VARCHAR},
+      carno = #{carno,jdbcType=VARCHAR},
+      carage = #{carage,jdbcType=INTEGER},
+      bcount = #{bcount,jdbcType=INTEGER},
+      isborrow = #{isborrow,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      create_admin = #{createAdmin,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR},
+      update_admin = #{updateAdmin,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

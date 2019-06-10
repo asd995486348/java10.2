@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!--指定扫描注解的包范围-->
+    <!--<context:component-scan base-package="com.lgz.cars.service,com.lgz.cars.controller" />-->
+    <context:component-scan base-package="com.lgz.cars" />
+    <!--开启springMVC的注解-->
+    <mvc:annotation-driven />
+    <!--引入数据库信息的配置文件-->
+    <context:property-placeholder location="classpath:db.properties" />
+    <!--配置数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+    </bean>
+    <!--配置sqlSession工厂-->
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--注入数据源-->
+        <property name="dataSource" ref="dataSource" />
+        <!--启用实体类别名-->
+        <property name="typeAliasesPackage" value="com.lgz.cars.pojo" />
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <value>dialect=mysql</value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+    <!--mapper文件自动转换为实现类-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--这里必须使用value,不能使用ref-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean" />
+        <!--指定mapper文件所在包-->
+        <property name="basePackage" value="com.lgz.cars.mapper" />
+    </bean>
+    <!--配置事务管理组件-->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <!--开启注解式事务管理-->
+    <tx:annotation-driven transaction-manager="txManager" />
+    <!--配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--配置controller转发时的前缀与后缀-->
+        <property name="prefix" value="/WEB-INF/view/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+    <!--配置静态资源-->
+    <mvc:resources mapping="/static/**" location="/static/" />
+    <!--解决ajax请求ie8时会遇到自动下载json文件的bug-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=utf-8</value>
+                        <value>application/json;charset=utf-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+</beans>

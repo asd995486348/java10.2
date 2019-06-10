@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lgz.cars.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.lgz.cars.pojo.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="powerid" property="powerid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="VARCHAR" />
+    <result column="create_admin" property="createAdmin" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
+    <result column="update_admin" property="updateAdmin" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, username, password, realname, phone, powerid, status, create_date, create_admin, 
+    update_date, update_admin
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lgz.cars.pojo.User" >
+    insert into user (id, username, password, 
+      realname, phone, powerid, 
+      status, create_date, create_admin, 
+      update_date, update_admin)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{realname,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{powerid,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{createDate,jdbcType=VARCHAR}, #{createAdmin,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=VARCHAR}, #{updateAdmin,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lgz.cars.pojo.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="realname != null" >
+        realname,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="powerid != null" >
+        powerid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createAdmin != null" >
+        create_admin,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="updateAdmin != null" >
+        update_admin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="powerid != null" >
+        #{powerid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createAdmin != null" >
+        #{createAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateAdmin != null" >
+        #{updateAdmin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lgz.cars.pojo.User" >
+    update user
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="powerid != null" >
+        powerid = #{powerid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="createAdmin != null" >
+        create_admin = #{createAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateAdmin != null" >
+        update_admin = #{updateAdmin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lgz.cars.pojo.User" >
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      realname = #{realname,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      powerid = #{powerid,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      create_admin = #{createAdmin,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR},
+      update_admin = #{updateAdmin,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="login" parameterType="User" resultType="User">
+    select u.*,p.power from user u,power p where u.powerid=p.id and username=#{username} and password=#{password}
+  </select>
+
+  <select id="getPage" resultType="User" parameterType="User">
+    select u.*,p.power from user u,power p where u.powerid=p.id
+    <if test="username!=null and username!=''">
+      and u.username=#{username}
+    </if>
+    <if test="realname!=null and realname!=''">
+      and u.realname like concat('%',#{realname},'%')
+    </if>
+    <if test="phone!=null and phone!=''">
+      and u.phone=#{phone}
+    </if>
+    <if test="powerid!=null">
+      and u.powerid=#{powerid}
+    </if>
+    <if test="status!=null">
+      and u.status=#{status}
+    </if>
+  </select>
+
+  <select id="checkUname" resultType="User" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from user where username=#{username}
+  </select>
+</mapper>
