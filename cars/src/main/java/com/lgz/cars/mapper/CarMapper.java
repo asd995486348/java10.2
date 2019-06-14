@@ -2,6 +2,8 @@ package com.lgz.cars.mapper;
 
 import com.lgz.cars.pojo.Car;
 
+import java.util.List;
+
 public interface CarMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,8 @@ public interface CarMapper {
     int updateByPrimaryKeySelective(Car record);
 
     int updateByPrimaryKey(Car record);
+
+    List<Car> getAll(Car car);
+
+    Car getById(Integer id);
 }

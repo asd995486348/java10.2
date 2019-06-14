@@ -1,5 +1,8 @@
 package com.lgz.cars.util;
 
+import com.lgz.cars.pojo.User;
+
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -172,9 +175,34 @@ public class MyUtils {
 		return UUID.randomUUID().toString();
 	}
 
+	public static String getLoginName(HttpSession session){
+		User user= (User) session.getAttribute("loginUser");
+		if (user!=null){
+			return user.getRealname();
+		}
+		return null;
+	}
+
+	public static Integer getLoginPowerid(HttpSession session){
+		User user= (User) session.getAttribute("loginUser");
+		if (user!=null){
+			return user.getPowerid();
+		}
+		return null;
+	}
+
+	public static User getLoginUser(HttpSession session){
+		User user= (User) session.getAttribute("loginUser");
+		if (user!=null){
+			return user;
+		}
+		return new User();
+	}
+
 	public static void main(String[] args) {
 		for (int i=0;i<20;i++){
 			System.out.println(getUUID());
 		}
+		System.out.println(3%4);
 	}
 }

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html class="x-admin-sm">
     <head>
@@ -55,70 +56,84 @@
         <div class="left-nav">
             <div id="side-nav">
                 <ul id="nav">
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="会员管理">&#xe6b8;</i>
-                            <cite>用户管理</cite>
-                            <i class="iconfont nav_right">&#xe697;</i></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('用户列表','user/toList.do',true)">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>用户列表</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('权限列表','power/toList.do')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>权限列表</cite></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="车辆管理">&#xe723;</i>
-                            <cite>车辆管理</cite>
-                            <i class="iconfont nav_right">&#xe697;</i></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('车辆列表','order-list.html')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>车辆列表</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('品牌管理','brand/toList.do',true)">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>品牌管理</cite></a>
-                            </li>
-                        </ul>
-                    </li>
+                    <c:if test="${loginUser.powerid==1}">
+                        <li>
+                            <a href="javascript:;">
+                                <i class="iconfont left-nav-li" lay-tips="会员管理">&#xe6b8;</i>
+                                <cite>用户管理</cite>
+                                <i class="iconfont nav_right">&#xe697;</i></a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a onclick="xadmin.add_tab('用户列表','user/toList.do',true)">
+                                        <i class="iconfont">&#xe6a7;</i>
+                                        <cite>用户列表</cite></a>
+                                </li>
+                                <li>
+                                    <a onclick="xadmin.add_tab('权限列表','power/toList.do')">
+                                        <i class="iconfont">&#xe6a7;</i>
+                                        <cite>权限列表</cite></a>
+                                </li>
+                            </ul>
+                        </li>
+                    </c:if>
+
+                    <c:if test="${loginUser.powerid<3}">
+                        <li>
+                            <a href="javascript:;">
+                                <i class="iconfont left-nav-li" lay-tips="车辆管理">&#xe723;</i>
+                                <cite>车辆管理</cite>
+                                <i class="iconfont nav_right">&#xe697;</i></a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a onclick="xadmin.add_tab('车辆列表','cars/toList.do',true)">
+                                        <i class="iconfont">&#xe6a7;</i>
+                                        <cite>车辆列表</cite></a>
+                                </li>
+                                <li>
+                                    <a onclick="xadmin.add_tab('品牌管理','brand/toList.do',true)">
+                                        <i class="iconfont">&#xe6a7;</i>
+                                        <cite>品牌管理</cite></a>
+                                </li>
+                            </ul>
+                        </li>
+                    </c:if>
+
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont left-nav-li" lay-tips="用车管理">&#xe723;</i>
                             <cite>用车管理</cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
+
+                            <c:if test="${loginUser.powerid>2}">
+                                <li>
+                                    <a onclick="xadmin.add_tab('借车管理','cars/toList.do',true)">
+                                        <i class="iconfont">&#xe6a7;</i>
+                                        <cite>借车管理</cite>
+                                    </a>
+                                </li>
+                            </c:if>
+
+                            <c:if test="${loginUser.powerid==2}">
+                                <li>
+                                    <a onclick="xadmin.add_tab('还车管理','cate.html')">
+                                        <i class="iconfont">&#xe6a7;</i>
+                                        <cite>还车管理</cite></a>
+                                </li>
+                            </c:if>
+
                             <li>
-                            <a onclick="xadmin.add_tab('借车管理','cate.html')">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>借车管理</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('还车管理','cate.html')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>还车管理</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('借车记录','cate.html')">
+                                <a onclick="xadmin.add_tab('借车记录','record/borrowList.do?apply=10',true)">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>借车记录</cite></a>
                             </li>
                             <li>
-                                <a onclick="xadmin.add_tab('还车记录','cate.html')">
+                                <a onclick="xadmin.add_tab('还车记录','record/borrowList.do?apply=40',true)">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>还车记录</cite></a>
                             </li>
                             <li>
-                                <a onclick="xadmin.add_tab('所有记录','cate.html')">
+                                <a onclick="xadmin.add_tab('所有记录','record/borrowList.do',true)">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>所有记录</cite></a>
                             </li>

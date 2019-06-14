@@ -50,18 +50,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResBean update(User user, HttpSession session) {
-        User loginUser= (User) session.getAttribute("loginUser");
         if (StringUtils.isNotEmpty(user.getPassword())){
             user.setPassword(MD5Util.MD5(user.getPassword()));
         }
         int result=0;
         if (user.getId()==null){
             user.setCreateDate(MyUtils.getNowTime());
-            user.setCreateAdmin(loginUser.getRealname());
+            user.setCreateAdmin(MyUtils.getLoginName(session));
             result=userMapper.insertSelective(user);
         }else {
             user.setUpdateDate(MyUtils.getNowTime());
-            user.setUpdateAdmin(loginUser.getRealname());
+            user.setUpdateAdmin(MyUtils.getLoginName(session));
             result=userMapper.updateByPrimaryKeySelective(user);
         }
         if (result>0){

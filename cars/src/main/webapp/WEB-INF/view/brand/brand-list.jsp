@@ -40,7 +40,8 @@
                         <div class="layui-card-body ">
                             <form class="layui-form layui-col-space5">
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <input class="layui-input" placeholder="分类名" name="cate_name"></div>
+                                    <input type="hidden" name="pid" value="0">
+                                    <input class="layui-input" placeholder="品牌名" name="brand" lay-verify="required" required></div>
                                 <div class="layui-input-inline layui-show-xs-block">
                                     <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon"></i>增加</button>
                                 </div>
@@ -56,8 +57,8 @@
         </div>
 
         <script type="text/html" id="staTpl">
-
         </script>
+
         <script>
           layui.config({
               /*设置第三方插件地址*/
@@ -81,6 +82,65 @@
                     form.render();
                 }
             });
+
+            form.on('submit(sreach)',function (obj) {
+                $.ajax({
+                    url:'brand/doEdit.do',
+                    data:obj.field,
+                    method: 'post',
+                    dataType:'json',
+                    success:function (res) {
+                        layer.alert(res.msg,{icon:res.code==1?6:5},function () {
+                            location.reload();
+                        })
+                    },
+                    error:function (e) {
+                        console.log(e);
+                        layer.alert("与服务器连接失败!添加不成功...",{icon:5});
+                    }
+                });
+                return false;
+            });
+
+            form.on('switch(staFilter)',function (data) {
+                /*获取点击的开关所在的行标签*/
+                var tr=$(data.elem).parents('tr');
+                /*获取点击的开关的pid的值*/
+                var pid=tr.attr('data-pid');
+                /*pid!=0代表有子集*/
+                if (pid!=0){
+                    /*寻找父级品牌id*/
+                    var ptr=$('tr[data-id='+pid+']');
+                    var isCheck=ptr.find('input[type="checkbox"]')[0].checked;
+                    /*父级品牌被禁用时*/
+                    if (!isCheck){
+                        layer.alert("上级被禁用!");
+                        /*设置当前的开关为关闭状态*/
+                        data.elem.checked=false;
+                        /*重新渲染开关组件*/
+                        form.render();
+                        return false;
+                    }
+                }
+                  $.ajax({
+                      url:'brand/updateSta.do',
+                      data:{
+                          id:data.value,
+                          status:data.elem.checked?1:2,
+                      },
+                      method:'post',
+                      dataType: 'json',
+                      success:function (res) {
+                          layer.msg(res.msg,{icon:res.code==1?6:5,time:800},function () {
+                              location.reload();
+                          });
+                      },
+                      error:function (e) {
+                          console.log(e);
+                          layer.alert("与服务器连接失败!请稍后再试...");
+                      }
+                  });
+              });
           });
 
           function staTpl(obj) {
@@ -88,14 +148,15 @@
               if(obj.status==1){
                   checked='checked';
               }
-              return '<input type="checkbox" lay-text="可用|禁用" lay-skin="switch" lay-filter="staFilter" '+checked+' >';
+              return '<input type="checkbox" lay-text="可用|禁用" lay-skin="switch" value="'+obj.id+'" lay-filter="staFilter" '+checked+' >';
           }
 
           function optTpl(obj) {
-              var btns='';
-              var editBtn='<button type="button" class="layui-btn">修改</button>';
-              var addChildren='<button type="button" class="layui-btn">添加子项</button>';
-              btns=editBtn+addChildren;
+              var editBtn='<button type="button" class="layui-btn" onclick="xadmin.open(\'修改品牌\',\'brand/toEdit.do?id='+obj.id+'\',500,250)">修改</button>';
+              var addChildren='<button type="button" class="layui-btn" onclick="xadmin.open(\'添加子项\',\'brand/toEdit.do?pid='+obj.id+'\',500,250)">添加子项</button>';
+              if (obj.pid==0){
+                  editBtn+=addChildren;
+              }
               $.ajax({
                   url: 'brand/getChildren.do',
                   data:{
@@ -105,7 +166,7 @@
                   async:false,
                   success:function (res) {
                       if (res.code==1){
-                          btns+='<button type="button" class="layui-btn layui-btn-danger">删除</button>';
+                          editBtn+='<button type="button" class="layui-btn layui-btn-danger" onclick="del('+obj.id+')">删除</button>';
                       }
                   },
                   error:function (e) {
@@ -113,7 +174,29 @@
                       console.log(e);
                   }
               });
-              return btns;
+              return editBtn;
+          }
+
+          function del(id) {
+              layer.confirm("确认删除本数据吗?",function () {
+                  $.ajax({
+                      url: 'brand/delete.do',
+                      data:{
+                          id:id
+                      },
+                      method: 'post',
+                      dataType:'json',
+                      success:function (res) {
+                          layer.alert(res.msg,{icon:res.code==1?6:5},function () {
+                              location.reload();//刷新表格
+                          });
+                      },
+                      error:function (e) {
+                          console.log(e);
+                          layer.alert("与服务器连接失败!请稍后再试...",{icon:5});
+                      }
+                  });
+              });
           }
 
            /*用户-删除*/

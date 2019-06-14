@@ -41,7 +41,7 @@
       #{createAdmin,jdbcType=VARCHAR}, #{updateDate,jdbcType=VARCHAR}, #{updateAdmin,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lgz.cars.pojo.Car" >
+  <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true" parameterType="com.lgz.cars.pojo.Car" >
     insert into car
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -174,4 +174,24 @@
       update_admin = #{updateAdmin,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getAll" parameterType="Car" resultType="Car">
+    select c.id,c.color,c.carno,c.carage,c.bcount,c.isborrow,c.status,c.brandid,b.pid,concat(bp.brand,' ',b.brand) brand from car c,brand b,brand bp where c.brandid=b.id and b.pid=bp.id
+    <if test="carno!=null and carno!=''">
+      and c.carno like concat('%',#{carno},'%')
+    </if>
+    <if test="brandid!=null">
+      and c.brandid=#{brandid}
+    </if>
+    <if test="status!=null">
+      and c.status=#{status}
+    </if>
+    <if test="isborrow!=null">
+      and c.isborrow=#{isborrow}
+    </if>
+  </select>
+
+  <select id="getById" parameterType="int" resultType="Car">
+    select c.*,concat(bp.brand,'/',b.brand) brand from car c,brand b,brand bp where c.brandid=b.id and b.pid=bp.id and c.id=#{id}
+  </select>
 </mapper>

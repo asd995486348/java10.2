@@ -18,4 +18,6 @@ public interface BrandMapper {
     int updateByPrimaryKey(Brand record);
 
     List<Brand> getAll(Brand brand);
+
+    int updateByPid(Brand brand);
 }

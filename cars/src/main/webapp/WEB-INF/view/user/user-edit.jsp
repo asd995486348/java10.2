@@ -31,7 +31,7 @@
                           <span class="x-red">*</span>登录名
                       </label>
                       <div class="layui-input-inline">
-                          <input type="text" value="${user.username}" id="username" name="username"required=""autocomplete="off" class="layui-input"
+                          <input type="text" value="${user.username}" id="username" name="username" required="" autocomplete="off" class="layui-input"
                           <c:choose>
                              <c:when test="${empty user}">
                                  lay-verify="required|nikename|username|rename"

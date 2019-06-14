@@ -220,4 +220,23 @@
       update_admin = #{updateAdmin,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getAll" resultType="Record" parameterType="Record">
+    select r.*,u.realname,c.carno from record r,user u,car c where r.uid=u.id and r.carid=c.id
+    <if test="status!=null">
+      and r.status=#{status}
+    </if>
+    <if test="uid!=null">
+      and r.uid=#{uid}
+    </if>
+    <if test="apply!=null">
+      and r.apply=#{apply}
+    </if>
+    <if test="btime!=null and btime!=''">
+      and r.btime between #{createAdmin} and #{createDate}
+    </if>
+    <if test="rtime!=null and rtime!=''">
+      and r.rtime between #{updateAdmin} and #{updateDate}
+    </if>
+  </select>
 </mapper>
