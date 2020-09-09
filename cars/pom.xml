@@ -21,7 +21,7 @@
     <!--标签名可自定义,但是下面要引用此标签-->
     <javax.version>8.0</javax.version><!--预设jdk版本号-->
     <fastjson.version>1.2.58</fastjson.version><!--fastjson版本号-->
-    <hibernate.version>5.2.4.Final</hibernate.version>
+    <hibernate.version>5.3.6.Final</hibernate.version>
     <jstl.version>1.2.2</jstl.version><!--jstl版本号-->
     <lang.version>2.6</lang.version><!--java通用工具包版本号-->
     <uploader.version>1.3.1</uploader.version><!--上传工具版本号-->
