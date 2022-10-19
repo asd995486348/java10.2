@@ -33,7 +33,7 @@
     <log4j.version>1.7.12</log4j.version><!--日志包版本号-->
     <spring.version>4.2.4.RELEASE</spring.version><!--spring版本号-->
     <aspectj.version>1.8.2</aspectj.version><!--aop支持包版本号-->
-    <fastxml.version>2.5.1</fastxml.version><!--spring专用json包-->
+    <fastxml.version>2.13.4.1</fastxml.version><!--spring专用json包-->
   </properties>
 
   <dependencies>
